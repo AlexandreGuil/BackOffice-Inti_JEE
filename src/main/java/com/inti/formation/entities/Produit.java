@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
@@ -21,28 +23,26 @@ import javax.validation.ValidationException;
 @Entity
 @Table(name = "produit")
 public class Produit implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	private Long idProduit; // Primary key
 	private String nomProduit;
 	private String description;
 	private Double prix;
-	private Integer StockDuProduit; 
+	private Integer StockDuProduit;
 	private Boolean selection;
 	private String photo; // PATH to the img folder
 	private Categorie categorie;
-	
-	@OneToMany(mappedBy = "produit", fetch = FetchType.LAZY)
-	private List<LigneCommande> ligneDeCommande;
-	
+	private List<LigneCommande> ligneDeCommande; //
+
 	/**
 	 * 
-	 * tst the validity of the input constructor ProductName and the input CategoryName
-	 * like a init() function
+	 * tst the validity of the input constructor ProductName and the input
+	 * CategoryName like a init() function
 	 * 
 	 */
-	
+
 	@PrePersist
 	@PreUpdate
 	private void validData() {
@@ -51,128 +51,135 @@ public class Produit implements Serializable {
 		if (description == null || "".equals(description))
 			throw new ValidationException("La description du produit n'est pas valide");
 	}
-	
-	public Produit() {}
 
-	public Produit(String nomProduit, String description, Double prix, Integer StockDuProduit, Boolean selection,
-			String photo, Categorie categorie) {
+	public Produit() {
+	}
+
+	public Produit(String nomProduit, String description, Double prix, Integer stockDuProduit, Boolean selection,
+			String photo, Categorie categorie, List<LigneCommande> ligneDeCommande) {
 		this.nomProduit = nomProduit;
 		this.description = description;
 		this.prix = prix;
-		this.StockDuProduit = StockDuProduit;
+		StockDuProduit = stockDuProduit;
 		this.selection = selection;
 		this.photo = photo;
 		this.categorie = categorie;
+		this.ligneDeCommande = ligneDeCommande;
 	}
 
-	public Produit(Long idProduit, String nomProduit, String description, Double prix, Integer StockDuProduit,
-			Boolean selection, String photo, Categorie categorie) {
+	public Produit(Long idProduit, String nomProduit, String description, Double prix, Integer stockDuProduit,
+			Boolean selection, String photo, Categorie categorie, List<LigneCommande> ligneDeCommande) {
 		this.idProduit = idProduit;
 		this.nomProduit = nomProduit;
 		this.description = description;
 		this.prix = prix;
-		this.StockDuProduit = StockDuProduit;
+		StockDuProduit = stockDuProduit;
 		this.selection = selection;
 		this.photo = photo;
 		this.categorie = categorie;
+		this.ligneDeCommande = ligneDeCommande;
 	}
-	
+
 	/**
 	 * 
-	 * @GeneratedValue(strategy = GenerationType.AUTO)
-	 * Generate automaticaly the Primary Key value with the
-	 * more apropriated strategy to avoid the drop between id values
+	 * @GeneratedValue(strategy = GenerationType.AUTO) Generate automaticaly the
+	 *                          Primary Key value with the more apropriated strategy
+	 *                          to avoid the drop between id values
 	 *
 	 */
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	public Long getIdProduit() {
 		return idProduit;
 	}
-	
+
 	public void setIdProduit(Long idProduit) {
 		this.idProduit = idProduit;
 	}
-	
+
 	@Basic(optional = false)
 	@Column(name = "DESIGNATION")
-	public String getDesignation() {
+	public String getNomProduit() {
 		return nomProduit;
 	}
-	
-	public void setDesignation(String designation) {
-		this.nomProduit = designation;
+
+	public void setNomProduit(String nomProduit) {
+		this.nomProduit = nomProduit;
 	}
-	
+
 	@Basic(optional = false)
 	@Column(name = "DESCRIPTION")
 	public String getDescription() {
 		return description;
 	}
-	
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+
 	@Basic(optional = false)
 	@Column(name = "PRIX")
 	public Double getPrix() {
 		return prix;
 	}
-	
+
 	public void setPrix(Double prix) {
 		this.prix = prix;
 	}
-	
+
 	@Basic(optional = true)
 	@Column(name = "QUANTITE")
-	public Integer getQuantite() {
+	public Integer getStockDuProduit() {
 		return StockDuProduit;
 	}
-	
-	public void setQuantite(Integer StockDuProduit) {
-		this.StockDuProduit = StockDuProduit;
+
+	public void setStockDuProduit(Integer stockDuProduit) {
+		StockDuProduit = stockDuProduit;
 	}
-	
+
 	@Basic(optional = true)
 	@Column(name = "SELECTION")
 	public Boolean getSelection() {
 		return selection;
 	}
-	
+
 	public void setSelection(Boolean selection) {
 		this.selection = selection;
 	}
-	
+
 	@Basic(optional = false)
 	@Column(name = "PHOTO")
 	public String getPhoto() {
 		return photo;
 	}
-	
+
 	public void setPhoto(String photo) {
 		this.photo = photo;
 	}
-	
+
 	/**
 	 * 
-	 * @ManyToOne(fetch = FetchType.EAGER)
-	 * Defines a many valued association with many to one multiplicity :
-	 * In our case one caterorie contain many products, and one product is linked to one category
+	 * @ManyToOne(fetch = FetchType.EAGER) Defines a many valued association with
+	 *                  many to one multiplicity : In our case one caterorie contain
+	 *                  many products, and one product is linked to one category
 	 * 
 	 * @JoinColumn(name = "CATEGORIE_ID", referencedColumnName = "CATEGORIE_ID")
-	 * Specifies a column for joining an entity association or element collection 
-	 * If the JoinColumn annotation itself is defaulted, a single join column is assumed and the default values apply
+	 *                  Specifies a column for joining an entity association or
+	 *                  element collection If the JoinColumn annotation itself is
+	 *                  defaulted, a single join column is assumed and the default
+	 *                  values apply
 	 * 
-	 * name: The name of the foreign key column in the categorie table
+	 *                  name: The name of the foreign key column in the categorie
+	 *                  table
 	 * 
-	 * referencedColumnName: The name of the column referenced by this foreign key column in the categorie table
+	 *                  referencedColumnName: The name of the column referenced by
+	 *                  this foreign key column in the categorie table
 	 * 
 	 * @return the categorie object liked with the product liked by the n:1 relation
 	 * 
 	 */
-	
+
 	@Basic(optional = false)
 	@Column(name = "CATEGORIE")
 	@ManyToOne(fetch = FetchType.EAGER)
@@ -180,15 +187,43 @@ public class Produit implements Serializable {
 	public Categorie getCategorie() {
 		return categorie;
 	}
-	
+
 	public void setCategorie(Categorie categorie) {
 		this.categorie = categorie;
 	}
-	
+
+	/**
+	 * 
+	 * @OneToMany(mappedBy = "produit", fetch = FetchType.LAZY)
+	 * 
+	 *                     Defines a many valued association with one to many
+	 *                     multiplicity : In our case one products contain many
+	 *                     LigneCommande, and one product is linked to one
+	 *                     LigneCommande
+	 * 
+	 *                     mappedBy: The Produit field in the LigneCommande table
+	 *                     that owns the relationship
+	 * 
+	 */
+
+	@OneToMany(mappedBy = "produit", fetch = FetchType.LAZY)
+	@OrderBy("idProduit")
+	public List<LigneCommande> getLigneDeCommande() {
+		return ligneDeCommande;
+	}
+
+	public void setLigneDeCommande(List<LigneCommande> ligneDeCommande) {
+		this.ligneDeCommande = ligneDeCommande;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 	@Override
 	public String toString() {
-		return "Produit [idProduit=" + idProduit + ", designation=" + nomProduit + ", description=" + description
-				+ ", prix=" + prix + ", StockDuProduit=" + StockDuProduit + ", selection=" + selection + ", photo=" + photo
-				+ ", categorie=" + categorie + "]";
-	}	
+		return "Produit [idProduit=" + idProduit + ", nomProduit=" + nomProduit + ", description=" + description
+				+ ", prix=" + prix + ", StockDuProduit=" + StockDuProduit + ", selection=" + selection + ", photo="
+				+ photo + ", categorie=" + categorie + ", ligneDeCommande=" + ligneDeCommande + "]";
+	}
 }

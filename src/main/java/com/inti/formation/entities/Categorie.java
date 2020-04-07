@@ -21,22 +21,22 @@ import javax.validation.ValidationException;
 @Entity
 @Table(name = "categorie")
 public class Categorie implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	private Long idCategorie; // Primary key
-	private String nomCategorie; 
+	private String nomCategorie;
 	private String photo; // PATH to the img folder
-	private String description; 
+	private String description;
 	private List<Produit> produits; // relationship 1:n to the prodct entity
-	
+
 	/**
 	 * 
-	 * tst the validity of the input constructor ProductName and the input CategoryName
-	 * like a init() function
+	 * tst the validity of the input constructor ProductName and the input
+	 * CategoryName like a init() function
 	 * 
 	 */
-	
+
 	@PrePersist
 	@PreUpdate
 	private void validData() {
@@ -45,8 +45,9 @@ public class Categorie implements Serializable {
 		if (description == null || "".equals(nomCategorie))
 			throw new ValidationException("Description de la catégorie n'est pas valide");
 	}
-	
-	public Categorie() {}
+
+	public Categorie() {
+	}
 
 	public Categorie(String nomCategorie, String photo, String description, List<Produit> produits) {
 		this.nomCategorie = nomCategorie;
@@ -62,15 +63,15 @@ public class Categorie implements Serializable {
 		this.description = description;
 		this.produits = produits;
 	}
-	
+
 	/**
 	 * 
-	 * @GeneratedValue(strategy = GenerationType.AUTO)
-	 * Generate automaticaly the Primary Key value with the
-	 * more apropriated strategy to avoid the drop between id values
+	 * @GeneratedValue(strategy = GenerationType.AUTO) Generate automaticaly the
+	 *                          Primary Key value with the more apropriated strategy
+	 *                          to avoid the drop between id values
 	 *
 	 */
-	
+
 	@Id
 	@Column(name = "CATEGORIE_ID")
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -81,27 +82,27 @@ public class Categorie implements Serializable {
 	public void setIdCategorie(Long idCategorie) {
 		this.idCategorie = idCategorie;
 	}
-	
+
 	@Basic(optional = false)
 	@Column(name = "NOM_CATEGORIE")
 	public String getNomCategorie() {
 		return nomCategorie;
 	}
-	
+
 	public void setNomCategorie(String nomCategorie) {
 		this.nomCategorie = nomCategorie;
 	}
-	
+
 	@Basic(optional = false)
 	@Column(name = "NOM_CATEGORIE")
 	public String getPhoto() {
 		return photo;
 	}
-	
+
 	public void setPhoto(String photo) {
 		this.photo = photo;
 	}
-	
+
 	@Basic(optional = false)
 	@Column(name = "DESCRIPTION")
 	public String getDescription() {
@@ -111,30 +112,32 @@ public class Categorie implements Serializable {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+
 	/**
 	 * 
-	 * @OneToMany(mappedBy = "categorie", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+	 * @OneToMany(mappedBy = "categorie", cascade = CascadeType.REMOVE, fetch =
+	 *                     FetchType.LAZY)
 	 * 
-	 * Defines a many valued association with one to many multiplicity :
-	 * In our case one categorie contain many products, and one product is linked to one category
+	 *                     Defines a many valued association with one to many
+	 *                     multiplicity : In our case one categorie contain many
+	 *                     products, and one product is linked to one category
 	 * 
-	 * mappedBy: The categorie field in the Produit table that owns the relationship 
+	 *                     mappedBy: The categorie field in the Produit table that
+	 *                     owns the relationship
 	 * 
-	 * cascade: The drop of the cotegorie lead to the drop of all the product link with this 
-	 * 			cotegorie
+	 *                     cascade: The drop of the cotegorie lead to the drop of
+	 *                     all the product link with this cotegorie
 	 * 
-	 * @OrderBy("designation ASC")
+	 *                     @OrderBy("designation ASC")
 	 * 
-	 * "nomCategorie ASC": sort the table with alphanuméric order of the categorie name 
+	 *                     "nomCategorie ASC": sort the table with alphanuméric
+	 *                     order of the categorie name
 	 * 
 	 * @return a list of the product object link with this categorie
 	 * 
 	 */
-	
-	@OneToMany(mappedBy = "categorie", 
-			cascade = CascadeType.REMOVE, 
-			fetch = FetchType.LAZY)
+
+	@OneToMany(mappedBy = "categorie", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
 	@OrderBy("nomCategorie ASC")
 	public List<Produit> getProduits() {
 		return produits;
@@ -146,7 +149,7 @@ public class Categorie implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Categorie [idCategorie=" + idCategorie + ", nomCategorie=" + nomCategorie + ", photo="
-				+ photo + ", description=" + description + ", produits=" + produits + "]";
+		return "Categorie [idCategorie=" + idCategorie + ", nomCategorie=" + nomCategorie + ", photo=" + photo
+				+ ", description=" + description + ", produits=" + produits + "]";
 	}
 }

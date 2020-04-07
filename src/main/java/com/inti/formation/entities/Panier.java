@@ -9,6 +9,7 @@ import javax.persistence.Table;
 @Table(name = "panier")
 public class Panier {
 	
+	
 	private List<Produit> produits;
 	private Double prixDuPanier;
 	
