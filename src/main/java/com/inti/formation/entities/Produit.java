@@ -1,6 +1,7 @@
 package com.inti.formation.entities;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -11,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
@@ -30,6 +32,7 @@ public class Produit implements Serializable {
 	private Boolean selection;
 	private String photo; // PATH to the img folder
 	private Categorie categorie;
+	private List<LigneCommande> ligneCommandes;
 	
 	/**
 	 * 
@@ -185,6 +188,33 @@ public class Produit implements Serializable {
 		this.categorie = categorie;
 	}
 	
+	/**
+	 * 
+	 * @OneToMany(mappedBy = "produit", cascade = CascadeType.REMOVE, fetch =
+	 *                     FetchType.LAZY)
+	 * 
+	 *                     Defines a many valued association with one to many
+	 *                     multiplicity : In our case one commande line contain many
+	 *                     products, and one product is linked to one category
+	 * 
+	 *                     mappedBy: The commande line field in the Produit table that
+	 *                     owns the relationship
+	 * 
+	 *                     cascade: if we drop of a product you also drop the  
+	 *                     the commande line
+	 * 
+	 */
+	
+	@OneToMany(fetch = FetchType.LAZY)
+	@JoinColumn(name = "idProduit")
+	public List<LigneCommande> getLigneCommandes() {
+		return ligneCommandes;
+	}
+
+	public void setLigneCommandes(List<LigneCommande> ligneCommandes) {
+		this.ligneCommandes = ligneCommandes;
+	}
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
