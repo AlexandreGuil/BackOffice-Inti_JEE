@@ -195,7 +195,7 @@ public class Produit implements Serializable {
 	 */
 
 	@Basic(optional = false)
-	@Column(name = "CATEGORIE")
+//	@Column(name = "CATEGORIE")
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "CATEGORIE_ID", referencedColumnName = "CATEGORIE_ID")
 	public Categorie getCategorie() {

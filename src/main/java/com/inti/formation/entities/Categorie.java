@@ -94,7 +94,7 @@ public class Categorie implements Serializable {
 	}
 
 	@Basic(optional = false)
-	@Column(name = "NOM_CATEGORIE")
+	@Column(name = "PHOTO")
 	public String getPhoto() {
 		return pathPhoto;
 	}

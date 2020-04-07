@@ -105,7 +105,7 @@ public class Commande implements Serializable {
 	 */
 
 	@Basic(optional = false)
-	@Column(name = "CLIENT_ID")
+//	@Column(name = "CLIENT_ID")
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "idClient", referencedColumnName = "CLIENT_ID")
 	public Client getClient() {
@@ -132,7 +132,7 @@ public class Commande implements Serializable {
 	 */
 
 	@Basic(optional = false)
-	@OneToMany(mappedBy = "commande", fetch = FetchType.LAZY)
+	@OneToMany(fetch = FetchType.LAZY) // mappedBy = "commande",
 	@JoinColumn(name = "idCommande")
 	public List<LigneCommande> getLigneDecommande() {
 		return ligneDecommande;
