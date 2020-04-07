@@ -1,10 +1,8 @@
 package com.inti.formation.entities;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,8 +11,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OrderBy;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
@@ -35,12 +31,6 @@ public class Produit implements Serializable {
 	private String photo; // PATH to the img folder
 	private Categorie categorie;
 	
-	/* ==================== begin test =========================== */
-	
-//	private List<LigneCommande> ligneDeCommande; //
-	
-	/* ==================== end test =========================== */
-
 	/**
 	 * 
 	 * tst the validity of the input constructor ProductName and the input
@@ -60,10 +50,8 @@ public class Produit implements Serializable {
 	public Produit() {
 	}
 	
-	/* ==================== begin test =========================== */
-	
 	public Produit(String nomProduit, String description, Double prix, Integer stockDuProduit, Boolean selection,
-			String photo, Categorie categorie /* ,  List<LigneCommande> ligneDeCommande */) {
+			String photo, Categorie categorie) {
 		this.nomProduit = nomProduit;
 		this.description = description;
 		this.prix = prix;
@@ -71,15 +59,10 @@ public class Produit implements Serializable {
 		this.selection = selection;
 		this.photo = photo;
 		this.categorie = categorie;
-//		this.ligneDeCommande = ligneDeCommande;
 	}
 	
-	/* ==================== end test =========================== */
-	
-	/* ==================== begin test =========================== */
-	
 	public Produit(Long idProduit, String nomProduit, String description, Double prix, Integer stockDuProduit,
-			Boolean selection, String photo, Categorie categorie /* , List<LigneCommande> ligneDeCommande */) {
+			Boolean selection, String photo, Categorie categorie) {
 		this.idProduit = idProduit;
 		this.nomProduit = nomProduit;
 		this.description = description;
@@ -88,11 +71,8 @@ public class Produit implements Serializable {
 		this.selection = selection;
 		this.photo = photo;
 		this.categorie = categorie;
-//		this.ligneDeCommande = ligneDeCommande;
 	}
 	
-	/* ==================== end test =========================== */
-
 	/**
 	 * 
 	 * @GeneratedValue(strategy = GenerationType.AUTO) Generate automaticaly the
@@ -195,7 +175,6 @@ public class Produit implements Serializable {
 	 */
 
 	@Basic(optional = false)
-//	@Column(name = "CATEGORIE")
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "CATEGORIE_ID", referencedColumnName = "CATEGORIE_ID")
 	public Categorie getCategorie() {
@@ -206,46 +185,14 @@ public class Produit implements Serializable {
 		this.categorie = categorie;
 	}
 	
-	/* ==================== begin test =========================== */
-
-	/**
-	 * 
-	 * @OneToMany(mappedBy = "produit", fetch = FetchType.LAZY)
-	 * 
-	 *                     Defines a many valued association with one to many
-	 *                     multiplicity : In our case one products contain many
-	 *                     LigneCommande, and one product is linked to one
-	 *                     LigneCommande
-	 * 
-	 *                     mappedBy: The Produit field in the LigneCommande table
-	 *                     that owns the relationship
-	 * 
-	 */
-
-//	@OneToMany(mappedBy = "produit", fetch = FetchType.LAZY)
-//	@OrderBy("idProduit")
-//	public List<LigneCommande> getLigneDeCommande() {
-//		return ligneDeCommande;
-//	}
-//
-//	public void setLigneDeCommande(List<LigneCommande> ligneDeCommande) {
-//		this.ligneDeCommande = ligneDeCommande;
-//	}
-	
-	/* ==================== end test =========================== */
-
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	
-	/* ==================== begin test =========================== */
 	
 	@Override
 	public String toString() {
 		return "Produit [idProduit=" + idProduit + ", nomProduit=" + nomProduit + ", description=" + description
 				+ ", prix=" + prix + ", StockDuProduit=" + StockDuProduit + ", selection=" + selection + ", photo="
-				+ photo + ", categorie=" + categorie + /* ", ligneDeCommande=" +  ligneDeCommande + */ "]";
+				+ photo + ", categorie=" + categorie + "]";
 	}
-	
-	/* ==================== end test =========================== */
 }

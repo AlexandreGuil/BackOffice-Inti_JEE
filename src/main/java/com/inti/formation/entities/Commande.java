@@ -14,7 +14,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -56,7 +55,7 @@ public class Commande implements Serializable {
 
 	@Id
 	@Column(name = "COMMANDE_ID")
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Long getIdCommande() {
 		return idCommande;
 	}
@@ -105,7 +104,6 @@ public class Commande implements Serializable {
 	 */
 
 	@Basic(optional = false)
-//	@Column(name = "CLIENT_ID")
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "idClient", referencedColumnName = "CLIENT_ID")
 	public Client getClient() {
@@ -132,7 +130,7 @@ public class Commande implements Serializable {
 	 */
 
 	@Basic(optional = false)
-	@OneToMany(fetch = FetchType.LAZY) // mappedBy = "commande",
+	@OneToMany(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idCommande")
 	public List<LigneCommande> getLigneDecommande() {
 		return ligneDecommande;

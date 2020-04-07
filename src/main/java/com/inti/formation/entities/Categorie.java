@@ -74,7 +74,7 @@ public class Categorie implements Serializable {
 
 	@Id
 	@Column(name = "CATEGORIE_ID")
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Long getIdCategorie() {
 		return idCategorie;
 	}

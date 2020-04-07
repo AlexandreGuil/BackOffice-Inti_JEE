@@ -51,7 +51,7 @@ public class Client implements Serializable {
 
 	@Id
 	@Column(name = "CLIENT_ID")
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Long getIdClient() {
 		return idClient;
 	}

@@ -1,64 +1,34 @@
 package com.inti.formation.entities;
 
+import java.io.Serializable;
+
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.Embedded;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "lignedecommande")
-public class LigneCommande {
-	
-	/* ==================== begin test =========================== */
-	
+public class LigneCommande implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
 	/**
 	 * @EmbeddedId instantiate a primary key with a combine foreign key stock in a
 	 *             class
 	 * 
 	 */
 
-//	@EmbeddedId // @Embedded inject an object in an antity
-//	private IdLigneCommande idLigneDeCommande;
-	
-	/* ==================== end test =========================== */
-	
-	private Long idLigneDeCommande;
-	private Produit produit;
-	
-	/* ==================== begin test =========================== */
-	
+	@EmbeddedId // @Embedded inject an object in an antity
+	private IdLigneCommande idLigneDeCommande;
 	private Integer quantiteProdCommande;
-	private Double prix;
-	
-	/* ==================== end test =========================== */
-	
-//	private Produit produit;
-//	private Commande commande;
-	
-	/* ==================== begin test =========================== */
-	
-	@Id
-	@Column(name = "LIGNE_DE_COMMANDE_ID")
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	public Long getIdLigneDeCommande() {
-		return idLigneDeCommande;
-	}
-	
-	public void setIdLigneDeCommande(Long idLigneDeCommande) {
-		this.idLigneDeCommande = idLigneDeCommande;
-	}
-	
-	/* ==================== end test =========================== */
+	private Double prix;	
+	private Produit produit;
+	private Commande commande;
 	
 	@Basic(optional = false)
 	@Column(name = "QUANTITE")
@@ -106,8 +76,6 @@ public class LigneCommande {
 		this.produit = produit;
 	}
 	
-	/* ==================== begin test =========================== */
-	
 	/**
 	 * 
 	 * @ManyToOne
@@ -122,21 +90,23 @@ public class LigneCommande {
 	 * 
 	 */
 
-//	@ManyToOne
-//	@MapsId(value = "idCommande")
-//	public Commande getCommande() {
-//		return commande;
-//	}
-//
-//	public void setCommande(Commande commande) {
-//		this.commande = commande;
-//	}
+	@ManyToOne
+	@MapsId(value = "idCommande")
+	public Commande getCommande() {
+		return commande;
+	}
 
-	/* ==================== end test =========================== */
+	public void setCommande(Commande commande) {
+		this.commande = commande;
+	}
+	
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 	
 	@Override
 	public String toString() {
 		return "LigneCommande [idLigneDeCommande=" + idLigneDeCommande + ", quantiteProdCommande="
-				+ quantiteProdCommande + ", prix=" + prix + ", produit=" + produit + /* ", commande=" + commande + */ "]";
+				+ quantiteProdCommande + ", prix=" + prix + ", produit=" + produit + ", commande=" + commande + "]";
 	}
 }
