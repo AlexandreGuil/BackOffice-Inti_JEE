@@ -34,7 +34,12 @@ public class Produit implements Serializable {
 	private Boolean selection;
 	private String photo; // PATH to the img folder
 	private Categorie categorie;
-	private List<LigneCommande> ligneDeCommande; //
+	
+	/* ==================== begin test =========================== */
+	
+//	private List<LigneCommande> ligneDeCommande; //
+	
+	/* ==================== end test =========================== */
 
 	/**
 	 * 
@@ -54,9 +59,11 @@ public class Produit implements Serializable {
 
 	public Produit() {
 	}
-
+	
+	/* ==================== begin test =========================== */
+	
 	public Produit(String nomProduit, String description, Double prix, Integer stockDuProduit, Boolean selection,
-			String photo, Categorie categorie, List<LigneCommande> ligneDeCommande) {
+			String photo, Categorie categorie /* ,  List<LigneCommande> ligneDeCommande */) {
 		this.nomProduit = nomProduit;
 		this.description = description;
 		this.prix = prix;
@@ -64,11 +71,15 @@ public class Produit implements Serializable {
 		this.selection = selection;
 		this.photo = photo;
 		this.categorie = categorie;
-		this.ligneDeCommande = ligneDeCommande;
+//		this.ligneDeCommande = ligneDeCommande;
 	}
-
+	
+	/* ==================== end test =========================== */
+	
+	/* ==================== begin test =========================== */
+	
 	public Produit(Long idProduit, String nomProduit, String description, Double prix, Integer stockDuProduit,
-			Boolean selection, String photo, Categorie categorie, List<LigneCommande> ligneDeCommande) {
+			Boolean selection, String photo, Categorie categorie /* , List<LigneCommande> ligneDeCommande */) {
 		this.idProduit = idProduit;
 		this.nomProduit = nomProduit;
 		this.description = description;
@@ -77,8 +88,10 @@ public class Produit implements Serializable {
 		this.selection = selection;
 		this.photo = photo;
 		this.categorie = categorie;
-		this.ligneDeCommande = ligneDeCommande;
+//		this.ligneDeCommande = ligneDeCommande;
 	}
+	
+	/* ==================== end test =========================== */
 
 	/**
 	 * 
@@ -89,7 +102,8 @@ public class Produit implements Serializable {
 	 */
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "PRODUIT_ID")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Long getIdProduit() {
 		return idProduit;
 	}
@@ -191,6 +205,8 @@ public class Produit implements Serializable {
 	public void setCategorie(Categorie categorie) {
 		this.categorie = categorie;
 	}
+	
+	/* ==================== begin test =========================== */
 
 	/**
 	 * 
@@ -206,24 +222,30 @@ public class Produit implements Serializable {
 	 * 
 	 */
 
-	@OneToMany(mappedBy = "produit", fetch = FetchType.LAZY)
-	@OrderBy("idProduit")
-	public List<LigneCommande> getLigneDeCommande() {
-		return ligneDeCommande;
-	}
-
-	public void setLigneDeCommande(List<LigneCommande> ligneDeCommande) {
-		this.ligneDeCommande = ligneDeCommande;
-	}
+//	@OneToMany(mappedBy = "produit", fetch = FetchType.LAZY)
+//	@OrderBy("idProduit")
+//	public List<LigneCommande> getLigneDeCommande() {
+//		return ligneDeCommande;
+//	}
+//
+//	public void setLigneDeCommande(List<LigneCommande> ligneDeCommande) {
+//		this.ligneDeCommande = ligneDeCommande;
+//	}
+	
+	/* ==================== end test =========================== */
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-
+	
+	/* ==================== begin test =========================== */
+	
 	@Override
 	public String toString() {
 		return "Produit [idProduit=" + idProduit + ", nomProduit=" + nomProduit + ", description=" + description
 				+ ", prix=" + prix + ", StockDuProduit=" + StockDuProduit + ", selection=" + selection + ", photo="
-				+ photo + ", categorie=" + categorie + ", ligneDeCommande=" + ligneDeCommande + "]";
+				+ photo + ", categorie=" + categorie + /* ", ligneDeCommande=" +  ligneDeCommande + */ "]";
 	}
+	
+	/* ==================== end test =========================== */
 }

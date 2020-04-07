@@ -88,7 +88,7 @@ public class Commande implements Serializable {
 	 *                  many to one multiplicity : In our case one caterorie contain
 	 *                  many products, and one product is linked to one category
 	 * 
-	 * @JoinColumn(name = "CATEGORIE_ID", referencedColumnName = "CATEGORIE_ID")
+	 * @JoinColumn(name = "idClient", referencedColumnName = "CATEGORIE_ID")
 	 *                  Specifies a column for joining an entity association or
 	 *                  element collection If the JoinColumn annotation itself is
 	 *                  defaulted, a single join column is assumed and the default
@@ -105,9 +105,9 @@ public class Commande implements Serializable {
 	 */
 
 	@Basic(optional = false)
-	@Column(name = "CLIENT")
+	@Column(name = "CLIENT_ID")
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "CLIENT_ID", referencedColumnName = "CLIENT_ID")
+	@JoinColumn(name = "idClient", referencedColumnName = "CLIENT_ID")
 	public Client getClient() {
 		return client;
 	}
@@ -126,11 +126,14 @@ public class Commande implements Serializable {
 	 *                     mappedBy: The command field in the LigneCommande table
 	 *                     that owns the relationship
 	 * 
+	 * @JoinColumn(name = "idCommande")
+	 * 
+	 * 
 	 */
 
 	@Basic(optional = false)
 	@OneToMany(mappedBy = "commande", fetch = FetchType.LAZY)
-	@OrderBy("idCommande")
+	@JoinColumn(name = "idCommande")
 	public List<LigneCommande> getLigneDecommande() {
 		return ligneDecommande;
 	}

@@ -26,7 +26,7 @@ public class Categorie implements Serializable {
 
 	private Long idCategorie; // Primary key
 	private String nomCategorie;
-	private String photo; // PATH to the img folder
+	private String pathPhoto; // PATH to the img folder // @Lob private byte[] photo
 	private String description;
 	private List<Produit> produits; // relationship 1:n to the prodct entity
 
@@ -49,17 +49,17 @@ public class Categorie implements Serializable {
 	public Categorie() {
 	}
 
-	public Categorie(String nomCategorie, String photo, String description, List<Produit> produits) {
+	public Categorie(String nomCategorie, String pathPhoto, String description, List<Produit> produits) {
 		this.nomCategorie = nomCategorie;
-		this.photo = photo;
+		this.pathPhoto = pathPhoto;
 		this.description = description;
 		this.produits = produits;
 	}
 
-	public Categorie(Long idCategorie, String nomCategorie, String photo, String description, List<Produit> produits) {
+	public Categorie(Long idCategorie, String nomCategorie, String pathPhoto, String description, List<Produit> produits) {
 		this.idCategorie = idCategorie;
 		this.nomCategorie = nomCategorie;
-		this.photo = photo;
+		this.pathPhoto = pathPhoto;
 		this.description = description;
 		this.produits = produits;
 	}
@@ -96,11 +96,11 @@ public class Categorie implements Serializable {
 	@Basic(optional = false)
 	@Column(name = "NOM_CATEGORIE")
 	public String getPhoto() {
-		return photo;
+		return pathPhoto;
 	}
 
-	public void setPhoto(String photo) {
-		this.photo = photo;
+	public void setPhoto(String pathPhoto) {
+		this.pathPhoto = pathPhoto;
 	}
 
 	@Basic(optional = false)
@@ -149,7 +149,7 @@ public class Categorie implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Categorie [idCategorie=" + idCategorie + ", nomCategorie=" + nomCategorie + ", photo=" + photo
+		return "Categorie [idCategorie=" + idCategorie + ", nomCategorie=" + nomCategorie + ", pathPhoto=" + pathPhoto
 				+ ", description=" + description + ", produits=" + produits + "]";
 	}
 }

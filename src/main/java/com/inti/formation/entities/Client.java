@@ -28,12 +28,12 @@ public class Client implements Serializable {
 	private String nomClient;
 	private String prenomClient;
 
-	// begin signin informations
+		// begin signin informations
 
 	private String email;
 	private String motDePasse;
 
-	// end signin informations
+		// end signin informations
 
 	// end signup informations
 
