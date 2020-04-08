@@ -3,6 +3,7 @@ package com.inti.formation.services;
 import java.util.List;
 
 import com.inti.formation.entities.Client;
+import com.inti.formation.entities.Commande;
 
 public interface IClientService {
 
@@ -10,4 +11,5 @@ public interface IClientService {
 	public void delete(Long id);
 	public Client getById(Long id);
 	public List<Client> findAll();
+	public Commande findLastCommande(Client c);
 }
