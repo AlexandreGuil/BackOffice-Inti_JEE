@@ -1,16 +1,18 @@
 package com.inti.formation.entities;
 
 import java.io.Serializable;
+import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -18,13 +20,14 @@ import javax.persistence.Table;
 public class User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	
 	private Long idUser;
 	private String userFirstName;
 	private String userLastName;
 	private String eMail;
 	private String password;
-	private boolean activated;
-	private Role role;
+	private Boolean activated;
+	private List<Role> role;
 
 	public User() {
 	}
@@ -36,8 +39,8 @@ public class User implements Serializable {
 		this.password = password;
 	}
 
-	public User(String userFirstName, String userLastName, String eMail, String password, boolean activated,
-			Role role) {
+	public User(String userFirstName, String userLastName, String eMail, String password, Boolean activated,
+			List<Role> role) {
 		this.userFirstName = userFirstName;
 		this.userLastName = userLastName;
 		this.eMail = eMail;
@@ -47,7 +50,7 @@ public class User implements Serializable {
 	}
 
 	public User(Long idUser, String userFirstName, String userLastName, String eMail, String password,
-			boolean activated) {
+			Boolean activated) {
 		this.idUser = idUser;
 		this.userFirstName = userFirstName;
 		this.userLastName = userLastName;
@@ -57,7 +60,7 @@ public class User implements Serializable {
 	}
 
 	public User(Long idUser, String userFirstName, String userLastName, String eMail, String password,
-			boolean activated, Role role) {
+			Boolean activated, List<Role> role) {
 		this.idUser = idUser;
 		this.userFirstName = userFirstName;
 		this.userLastName = userLastName;
@@ -127,39 +130,30 @@ public class User implements Serializable {
 	public void setActivated(boolean activated) {
 		this.activated = activated;
 	}
-
+	
 	/**
 	 * 
-	 * @ManyToOne(fetch = FetchType.EAGER) Defines a many valued association with
-	 *                  many to one multiplicity : In our case one role contain many
-	 *                  user, and one product is linked to one role
+	 * @OneToMany(mappedBy = "role", cascade = CascadeType.REMOVE, fetch =
+	 *                     FetchType.LAZY)
 	 * 
-	 * @JoinColumn(name="ROLE_ID", referencedColumnName = "ROLE_ID", nullable =
-	 *                             true) Specifies a column for joining an entity
-	 *                             association or element collection If the
-	 *                             JoinColumn annotation itself is defaulted, a
-	 *                             single join column is assumed and the default
-	 *                             values apply
+	 *                     Defines a many valued association with one to many
+	 *                     multiplicity : In our case one user contain many
+	 *                     products, and one product is linked to one category
 	 * 
-	 *                             name: The name of the foreign key column in the
-	 *                             role table
+	 *                     mappedBy: The role field in the user table that
+	 *                     owns the relationship
 	 * 
-	 *                             referencedColumnName: The name of the column
-	 *                             referenced by this foreign key column in the
-	 *                             role table
-	 * 
-	 *                             nullable: The referenced column can be contain a
-	 *                             null value in the table
+	 *                     cascade: The drop of the user lead to the drop of
+	 *                     all the product link with this user
 	 * 
 	 */
 
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "ROLE_ID", referencedColumnName = "ROLE_ID", nullable = true)
-	public Role getRole() {
+	@OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+	public List<Role> getRole() {
 		return role;
 	}
 
-	public void setRole(Role role) {
+	public void setRole(List<Role> role) {
 		this.role = role;
 	}
 

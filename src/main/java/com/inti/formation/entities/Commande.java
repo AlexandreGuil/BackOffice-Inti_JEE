@@ -1,6 +1,7 @@
 package com.inti.formation.entities;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -27,18 +28,18 @@ public class Commande implements Serializable {
 	private Long idCommande;
 	private Date dateCommande;
 	private Client client;
-	private List<LigneCommande> ligneDecommande;
+	private Collection<LigneCommande> ligneDecommande;
 
 	public Commande() {
 	}
 
-	public Commande(Date dateCommande, Client client, List<LigneCommande> ligneDecommande) {
+	public Commande(Date dateCommande, Client client, Collection<LigneCommande> ligneDecommande) {
 		this.dateCommande = dateCommande;
 		this.client = client;
 		this.ligneDecommande = ligneDecommande;
 	}
 
-	public Commande(Long idCommande, Date dateCommande, Client client, List<LigneCommande> ligneDecommande) {
+	public Commande(Long idCommande, Date dateCommande, Client client, Collection<LigneCommande> ligneDecommande) {
 		this.idCommande = idCommande;
 		this.dateCommande = dateCommande;
 		this.client = client;
@@ -132,12 +133,12 @@ public class Commande implements Serializable {
 	@Basic(optional = false)
 	@OneToMany(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idCommande")
-	public List<LigneCommande> getLigneDecommande() {
+	public Collection<LigneCommande> getLigneDecommande() {
 		return ligneDecommande;
 	}
 
-	public void setLigneDecommande(List<LigneCommande> ligneDecommande) {
-		this.ligneDecommande = ligneDecommande;
+	public void setLigneDecommande(Collection<LigneCommande> collection) {
+		this.ligneDecommande = collection;
 	}
 
 	public static long getSerialversionuid() {

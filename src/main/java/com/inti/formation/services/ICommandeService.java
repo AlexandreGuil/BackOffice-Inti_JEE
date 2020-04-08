@@ -3,8 +3,13 @@ package com.inti.formation.services;
 import java.util.Date;
 import java.util.List;
 
-import com.inti.formation.entities.Commande;
+import org.springframework.stereotype.Repository;
 
+import com.inti.formation.entities.Client;
+import com.inti.formation.entities.Commande;
+import com.inti.formation.entities.Panier;
+
+@Repository("commandeRepository")
 public interface ICommandeService {
 	
 	public void ajoutOrUpdate(Commande c);
@@ -12,5 +17,10 @@ public interface ICommandeService {
 	public Commande getById(Long id);
 	public List<Commande> findAll();
 	public Commande getByDate(Date d);
-
+	
+	/* =================== begin Alex =================== */
+	
+	public Commande saveCommande(Panier panier, Client client);
+	
+	/* =================== begin Alex =================== */
 }

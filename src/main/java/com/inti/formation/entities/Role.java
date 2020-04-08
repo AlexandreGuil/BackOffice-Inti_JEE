@@ -11,6 +11,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -23,20 +25,20 @@ public class Role implements Serializable {
 	
 	private Long idRole;
 	private String roleName;
-	private Collection<User> users;
+	private User user;
 	
 	public Role() {
 	}
 	
-	public Role(String roleName, Collection<User> users) {
+	public Role(String roleName, User user) {
 		this.roleName = roleName;
-		this.users = users;
+		this.user = user;
 	}	
 
-	public Role(Long idRole, String roleName, Collection<User> users) {
+	public Role(Long idRole, String roleName, User user) {
 		this.idRole = idRole;
 		this.roleName = roleName;
-		this.users = users;
+		this.user = user;
 	}
 
 	@Id
@@ -62,29 +64,40 @@ public class Role implements Serializable {
 	
 	/**
 	 * 
-	 * @OneToMany(mappedBy = "role", cascade = CascadeType.REMOVE, fetch =
-	 *                     FetchType.LAZY)
+	 * @ManyToOne(fetch = FetchType.EAGER) Defines a many valued association with
+	 *                  many to one multiplicity : In our case one user contain many
+	 *                  role, and one user is linked to one user
 	 * 
-	 *                     Defines a many valued association with one to many
-	 *                     multiplicity : In our case one user contain many
-	 *                     products, and one product is linked to one category
+	 * @JoinColumn(name="USER_ID", referencedColumnName = "USER_ID", nullable =
+	 *                             false) Specifies a column for joining an entity
+	 *                             association or element collection If the
+	 *                             JoinColumn annotation itself is defaulted, a
+	 *                             single join column is assumed and the default
+	 *                             values apply
 	 * 
-	 *                     mappedBy: The role field in the user table that
-	 *                     owns the relationship
+	 *                             name: The name of the foreign key column in the
+	 *                             user table
 	 * 
-	 *                     cascade: The drop of the user lead to the drop of
-	 *                     all the product link with this user
+	 *                             referencedColumnName: The name of the column
+	 *                             referenced by this foreign key column in the
+	 *                             user table
+	 * 
+	 *                             nullable: The referenced column can be contain a
+	 *                             null value in the table
 	 * 
 	 */
 	
+//	@OneToMany(mappedBy="user", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+	
 	@Basic(optional = false)
-	@OneToMany(mappedBy="role", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
-	public Collection<User> getUsers() {
-		return users;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "USER_ID", referencedColumnName = "USER_ID", nullable = false)
+	public User getUser() {
+		return user;
 	}
 
-	public void setUsers(Collection<User> users) {
-		this.users = users;
+	public void setUser(User user) {
+		this.user = user;
 	}
 	
 	public static long getSerialversionuid() {
@@ -93,6 +106,6 @@ public class Role implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Role [idRole=" + idRole + ", roleName=" + roleName + "]";
+		return "Role [idRole=" + idRole + ", roleName=" + roleName + ", user=" + user + "]";
 	}
 }
