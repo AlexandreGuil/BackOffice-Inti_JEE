@@ -39,12 +39,12 @@ public class Client implements Serializable {
 
 	private String adresse;
 	private String tel;
-	private List<Commande> commandes; // list of commande allready made by the client but not delivered yet
+	private List<Commande> commandes; // list of command already made by the client but not delivered yet
 
 	/**
 	 * 
-	 * @GeneratedValue(strategy = GenerationType.AUTO) Generate automaticaly the
-	 *                          Primary Key value with the more apropriated strategy
+	 * @GeneratedValue(strategy = GenerationType.AUTO) Generate automatically the
+	 *                          Primary Key value with the more appropriated strategy
 	 *                          to avoid the drop between id values
 	 *
 	 */
