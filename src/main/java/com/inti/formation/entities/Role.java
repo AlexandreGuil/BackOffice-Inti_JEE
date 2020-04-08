@@ -23,7 +23,7 @@ public class Role implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	private Long idRole;
+	private Integer idRole;
 	private String roleName;
 	private User user;
 	
@@ -35,7 +35,7 @@ public class Role implements Serializable {
 		this.user = user;
 	}	
 
-	public Role(Long idRole, String roleName, User user) {
+	public Role(Integer idRole, String roleName, User user) {
 		this.idRole = idRole;
 		this.roleName = roleName;
 		this.user = user;
@@ -44,11 +44,11 @@ public class Role implements Serializable {
 	@Id
 	@Column(name="ROLE_ID")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	public Long getIdRole() {
+	public Integer getIdRole() {
 		return idRole;
 	}
 
-	public void setIdRole(Long idRole) {
+	public void setIdRole(Integer idRole) {
 		this.idRole = idRole;
 	}
 	
