@@ -34,7 +34,7 @@ public class ImplWebShop implements IAdministrateurCategorieService{
 	private ICategorieRepository catRepo;
 	
 	@Autowired
-	@Qualifier("ligneCommandeRepository")
+	@Qualifier("commandeRepository")
 	private ICommandeRepository comRepo;
 	
 	@Autowired
