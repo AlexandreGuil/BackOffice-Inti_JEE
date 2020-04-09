@@ -21,9 +21,9 @@ import com.inti.formation.repositories.IProduitRepository;
 import com.inti.formation.repositories.IRoleRepository;
 import com.inti.formation.repositories.IUserRepository;
 
-@Service("webShop")
+@Service("adminCatService")
 @Transactional
-public class ImplWebShop implements IAdministrateurCategorieService{
+public class ImplAdministrateurCategorieService implements IAdministrateurCategorieService{
 	
 	@Autowired
 	@Qualifier("produitRepository")
@@ -129,6 +129,7 @@ public class ImplWebShop implements IAdministrateurCategorieService{
 	}
 
 	@Override
+	
 	public void updateUser(User user) {
 		userRepo.save(user);
 	}
