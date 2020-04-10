@@ -6,7 +6,7 @@ import com.inti.formation.entities.Client;
 
 public interface IClientService {
 
-	public void saveOrUpdate(Client c);
+	public Client saveOrUpdate(Client c);
 	public void delete(Long id);
 	public Client getById(Long id);
 	public List<Client> findAll();

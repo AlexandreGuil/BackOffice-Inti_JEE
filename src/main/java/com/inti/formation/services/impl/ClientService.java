@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import com.inti.formation.entities.Client;
 import com.inti.formation.repositories.IClientRepository;
-import com.inti.formation.repositories.ICommandeRepository;
 import com.inti.formation.services.IClientService;
 
 @Service(value = "clientService")
@@ -19,10 +18,6 @@ public class ClientService implements IClientService {
 	@Qualifier("clientRepository")
 	private IClientRepository repo;
 	
-	@Autowired
-	@Qualifier("commandeRepository")
-	private ICommandeRepository commandeRepo;
-
 	@Override
 	public Client getById(Long id) {
 		return repo.findById(id).get();
@@ -34,8 +29,8 @@ public class ClientService implements IClientService {
 	}
 
 	@Override
-	public void saveOrUpdate(Client c) {
-		repo.save(c);
+	public Client saveOrUpdate(Client c) {
+		return repo.save(c);
 	}
 
 	@Override

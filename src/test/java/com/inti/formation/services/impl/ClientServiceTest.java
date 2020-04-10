@@ -43,7 +43,8 @@ public class ClientServiceTest {
 		c.setNomClient("nouveau");
 		c.setPrenomClient("client");
 		c.setTel("0202020202");
-		service.saveOrUpdate(c);
+		Client c1 = service.saveOrUpdate(c);
+		assertNotNull(c1);
 		clients = service.findAll();
 		assertEquals(size+1, clients.size());
 	}
@@ -53,8 +54,7 @@ public class ClientServiceTest {
 	public void testUpdate() {
 		Client c = service.getById(2l);
 		c.setNomClient("nomUpdate");
-		service.saveOrUpdate(c);
-		Client c1 = service.getById(2l);
+		Client c1 = service.saveOrUpdate(c);
 		assertEquals(c.getNomClient(), c1.getNomClient());
 	}
 	
