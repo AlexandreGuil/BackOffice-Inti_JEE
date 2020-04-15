@@ -15,6 +15,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 
 @RestController
+@CrossOrigin(value = "*")
 @RequestMapping(value = "/apiAdminProduit")
 //@Validated
 public class AdminProduitController {

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin(value = "*")
 @RequestMapping(value = "/apiAdminCategorie")
 //@Validated
 public class AdminCategorieController {
