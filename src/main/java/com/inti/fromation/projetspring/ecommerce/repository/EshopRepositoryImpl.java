@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Date;
 import java.util.List;
 
-@Repository(value = "repository")
+@Repository
 public class EshopRepositoryImpl implements IEshopRepository {
 
     @Autowired

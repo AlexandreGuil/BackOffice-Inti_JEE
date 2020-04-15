@@ -1,4 +1,4 @@
-package com.inti.formation.projetspring.ecommerce;
+package com.inti.fromation.projetspring.ecommerce;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

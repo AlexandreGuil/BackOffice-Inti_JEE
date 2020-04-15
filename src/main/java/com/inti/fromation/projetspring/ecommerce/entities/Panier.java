@@ -9,7 +9,7 @@ import java.util.Map;
 @Data
 public class Panier {
 
-    private Map<Long, LigneCommande> dictPannier = new HashMap<Long, LigneCommande>();
+    private Map<Long, LigneCommande> dictPannier = new HashMap<>();
 
     public void addProduct(Produit p, int quantite) {
         if(dictPannier.get(p.getIdProduit()) != null)

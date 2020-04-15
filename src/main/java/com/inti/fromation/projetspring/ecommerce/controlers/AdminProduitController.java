@@ -35,9 +35,9 @@ public class AdminProduitController {
         return IOUtils.toByteArray(new FileInputStream(file));
     }
 
-    @PostMapping(value = "/saveProduit/{idCatégorie}")
-    public void saveProduit(@RequestBody Produit produit, @PathVariable Long idCatégorie) {
-        serv.saveProduit(produit, idCatégorie);
+    @PostMapping(value = "/saveProduit/{idCategorie}")
+    public void saveProduit(@RequestBody Produit produit, @PathVariable Long idCategorie) {
+        serv.saveProduit(produit, idCategorie);
     }
 
     @DeleteMapping(value = "/deleteProduit/{idproduit}")
