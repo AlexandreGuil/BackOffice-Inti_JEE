@@ -37,7 +37,7 @@ public class AdminCategorieController {
         serv.saveUser(user);
     }
 
-    @PostMapping(value = "/attribuerRole/{role}/{idUtilisateur}")
+    @PutMapping(value = "/attribuerRole/{role}/{idUtilisateur}")
     public void attribuerRole(@PathVariable Role role, @PathVariable Long idUtilisateur) {
         serv.addUtilisateurRole(role, idUtilisateur);
     }
