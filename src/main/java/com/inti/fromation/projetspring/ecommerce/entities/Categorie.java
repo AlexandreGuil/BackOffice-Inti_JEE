@@ -26,7 +26,7 @@ public class Categorie implements Serializable {
     @Column(name = "designation")
     private String nomCategorie;
     @Column(name = "photo")
-    private Byte[] photo;
+    private String photo; // byte[]
     @Column(name = "description")
     private String description;
 
@@ -34,7 +34,7 @@ public class Categorie implements Serializable {
     @JsonIgnoreProperties("categorie")
     private List<Produit> produits;
 
-    public Categorie(Long idCategorie, String nomCategorie, Byte[] photo, String description){
+    public Categorie(Long idCategorie, String nomCategorie, String photo, String description){
         this.idCategorie = idCategorie;
         this.nomCategorie = nomCategorie;
         this.photo = photo;
